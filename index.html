@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLA — Marketplace Listing Automation</title>
+  <meta name="description" content="Aplicativo desktop para Windows: catálogo mestre, importação de bases de produtos, compatibilidades e preparação de anúncios por marketplace e conta, com revisão humana antes de publicar.">
+  <meta name="theme-color" content="#0C0B10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#inicio">MLA<small>Marketplace Listing Automation</small></a>
+      <nav aria-label="Seções">
+        <a class="optional" href="#problema">Problema</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a class="optional" href="#telas">Telas</a>
+        <a class="optional" href="#arquitetura">Arquitetura</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <div class="wrap hero">
+      <h1>Do catálogo da empresa ao anúncio revisado, em escala.</h1>
+      <p class="lead">O MLA organiza a base de produtos do lojista, prepara anúncios por marketplace e por conta e
+        automatiza o preenchimento no navegador, sempre com a sua aprovação antes de publicar.</p>
+      <ul class="chips" aria-label="Situação do projeto">
+        <li class="chip violet">Versão 0.1.0 + Catálogo Mestre Inteligente</li>
+        <li class="chip ok">178 testes automatizados</li>
+        <li class="chip dev">Publicação real no Mercado Livre e Shopee em desenvolvimento</li>
+      </ul>
+      <div class="actions">
+        <a class="btn primary" href="#funcionalidades">Ver funcionalidades</a>
+        <a class="btn" href="#telas">Ver telas</a>
+      </div>
+      <figure>
+        <img class="shot" src="docs/images/dashboard.png" width="1360" height="749"
+             alt="Dashboard do MLA com o pipeline do catálogo e dos anúncios, pendências e situação por marketplace">
+        <figcaption>Interface real com dados fictícios. Os anúncios “publicados” desta tela foram publicados no
+          marketplace simulado incluído no app, não em um marketplace real.</figcaption>
+      </figure>
+    </div>
+
+    <section id="problema">
+      <div class="wrap">
+        <h2>O problema</h2>
+        <p class="sub">Vender o mesmo produto em vários marketplaces e contas multiplica o trabalho e os erros.</p>
+        <div class="grid">
+          <div class="card"><h3>Base espalhada</h3><p>Planilhas do ERP, XML, PDFs de fornecedores e pastas de fotos,
+            cada um com nomes de colunas diferentes.</p></div>
+          <div class="card"><h3>Dados divergentes</h3><p>SKUs, preços e estoques diferentes entre canais, sem saber de
+            onde veio cada informação.</p></div>
+          <div class="card"><h3>Compatibilidades sem fonte</h3><p>Aplicações em veículos e aparelhos anotadas sem origem,
+            misturando fatos e suposições.</p></div>
+          <div class="card"><h3>Publicação repetitiva</h3><p>Adaptar título, preço e imagens para cada conta e publicar
+            à mão é lento e arriscado.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="funcionalidades">
+      <div class="wrap">
+        <h2>Funcionalidades implementadas</h2>
+        <p class="sub">Tudo nesta seção funciona no aplicativo hoje e é coberto por testes automatizados.</p>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Catálogo mestre inteligente</h3>
+            <p>Um cadastro único do produto físico, separado dos anúncios.</p>
+            <ul>
+              <li>SKU principal e de variações, código do fabricante, GTIN/EAN com dígito verificador conferido.</li>
+              <li>Custo, preço de venda e promocional, estoque mínimo, unidade, situação comercial.</li>
+              <li>Descrição técnica, especificações, atributos personalizados, arquivos técnicos e mídias pendentes.</li>
+              <li>Busca por SKU de variação, GTIN, fabricante ou fornecedor; listas grandes carregadas aos poucos.</li>
+            </ul>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/catalogo-mestre.png" width="1360" height="749" loading="lazy"
+                 alt="Catálogo mestre com produtos, status, preço, estoque, mídia e compatibilidades">
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Central de Importações</h3>
+            <p>CSV, XLSX, JSON, XML, PDF (tabela ou ficha técnica), ZIP com planilha e fotos e pastas de imagens.</p>
+            <ul>
+              <li>Colunas reconhecidas automaticamente; nomes ambíguos exigem confirmação; modelos reutilizáveis.</li>
+              <li>Validação por linha, duplicatas, variações ligadas ao SKU pai, imagens associadas por nome ou SKU.</li>
+              <li>Cada alteração mostrada como “atual → arquivo”; criar, atualizar ou ignorar.</li>
+              <li>Nada é gravado antes da confirmação; cancelar não altera o catálogo; relatório por linha.</li>
+            </ul>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/importacao-mapeamento.png" width="1160" height="749" loading="lazy"
+                 alt="Assistente de importação no passo de mapeamento de colunas">
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Compatibilidade de produtos</h3>
+            <p>Marca, modelo, versão, anos, equipamento e código de referência, sempre com a fonte. Dados do cliente
+              entram como confirmados; fabricante e fontes externas, como não verificados. Nada é inferido.</p>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/compatibilidades.png" width="1360" height="749" loading="lazy"
+                 alt="Tela de compatibilidades com origem e verificação de cada registro">
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Preparação de anúncios por marketplace e conta</h3>
+            <p>Um produto gera um anúncio por conta, guardando só o que muda: título, descrição, preço, estoque,
+              categoria, atributos e imagens. Estados claros do rascunho à publicação confirmada, aprovação desfeita se
+              o conteúdo mudar e nota de completude calculada sem IA.</p>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/preparacao-anuncios.png" width="1360" height="749" loading="lazy"
+                 alt="Preparação de anúncios do Mercado Livre com situação e pendências de cada anúncio">
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Marketplaces e contas</h3>
+            <p>Várias contas por marketplace, conta padrão, URL do vendedor validada pelo domínio oficial, navegador
+              Edge dedicado e isolado por conta e teste de conexão com login manual.</p>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/marketplaces-contas.png" width="1360" height="749" loading="lazy"
+                 alt="Contas de Mercado Livre, Shopee e marketplace simulado com teste de conexão">
+          </figure>
+        </div>
+
+        <div class="feature">
+          <div class="copy">
+            <span class="chip ok">Disponível</span>
+            <h3>Automação com revisão humana</h3>
+            <p>Fila persistente, pausa, retomada, recuperação após fechar o app, prevenção de duplicados, capturas de
+              cada etapa e aprovação antes de publicar. Execução individual, em grupo ou em lote.</p>
+          </div>
+          <figure>
+            <img class="shot" src="docs/images/automacoes.png" width="1360" height="749" loading="lazy"
+                 alt="Fila de automações com itens publicados no marketplace simulado e um item com falha">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="fluxo">
+      <div class="wrap">
+        <h2>Como funciona</h2>
+        <p class="sub">Do arquivo do cliente ao anúncio, com pontos de revisão em cada etapa.</p>
+        <ol class="flow">
+          <li><strong>Importar</strong>planilha, XML, PDF ou ZIP</li>
+          <li><strong>Revisar</strong>alterações antes de gravar</li>
+          <li><strong>Completar</strong>catálogo e compatibilidades</li>
+          <li><strong>Preparar</strong>anúncio por conta</li>
+          <li><strong>Aprovar</strong>conteúdo do anúncio</li>
+          <li><strong>Executar</strong>fila e revisão final</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="telas">
+      <div class="wrap">
+        <h2>Mais telas</h2>
+        <p class="sub">Capturas reais do aplicativo com dados fictícios. Clique para ampliar.</p>
+        <div class="gallery">
+          <figure><a href="docs/images/editor-produto.png"><img class="shot" src="docs/images/editor-produto.png" width="1120" height="749" loading="lazy" alt="Editor do produto na aba Básico com GTIN, fornecedor e checagem do anúncio"></a><figcaption>Editor do produto</figcaption></figure>
+          <figure><a href="docs/images/importacao-revisao.png"><img class="shot" src="docs/images/importacao-revisao.png" width="1160" height="749" loading="lazy" alt="Revisão da importação com linhas para atualizar, sem mudanças e com erro"></a><figcaption>Revisão da importação</figcaption></figure>
+          <figure><a href="docs/images/grupos.png"><img class="shot" src="docs/images/grupos.png" width="1360" height="749" loading="lazy" alt="Grupos de produtos com marketplaces de destino"></a><figcaption>Grupos de produtos</figcaption></figure>
+          <figure><a href="docs/images/historico.png"><img class="shot" src="docs/images/historico.png" width="1360" height="749" loading="lazy" alt="Histórico de execuções no marketplace simulado"></a><figcaption>Histórico de operações (marketplace simulado)</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="arquitetura">
+      <div class="wrap">
+        <h2>Arquitetura</h2>
+        <p class="sub">Aplicativo desktop local: os dados ficam no computador do lojista.</p>
+        <div class="arch">
+          <div class="layer"><b>Interface</b><span>PySide6 (Qt), tema escuro, tarefas longas em segundo plano.</span></div>
+          <div class="layer"><b>Serviços</b><span>Catálogo, compatibilidades, anúncios, contas, importação e regras de validação.</span></div>
+          <div class="layer"><b>Importação</b><span>Leitores CSV/XLSX/JSON/XML/PDF, extração segura de ZIP, plano revisável e gravação em transação única.</span></div>
+          <div class="layer"><b>Automação</b><span>Fila persistente, execução em thread própria, Playwright com Microsoft Edge e adaptadores por marketplace.</span></div>
+          <div class="layer"><b>Persistência</b><span>SQLite com migrações versionadas e backup automático antes de cada atualização.</span></div>
+        </div>
+        <h3 style="margin-top:32px">Tecnologias</h3>
+        <ul class="chips">
+          <li class="chip">Python 3.13</li><li class="chip">PySide6</li><li class="chip">SQLite</li>
+          <li class="chip">Playwright</li><li class="chip">Microsoft Edge</li><li class="chip">openpyxl</li>
+          <li class="chip">pypdf</li><li class="chip">pytest</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="wrap">
+        <h2>Em desenvolvimento e roadmap</h2>
+        <p class="sub">O que ainda não está disponível aparece aqui, separado do que já funciona.</p>
+        <table>
+          <thead><tr><th>Etapa</th><th>Situação</th></tr></thead>
+          <tbody>
+            <tr><td>Base do app, catálogo, grupos, fila com revisão e marketplace simulado</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Catálogo mestre, Central de Importações, compatibilidades, preparação de anúncios e contas</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Inspeção autorizada e publicação real no Mercado Livre</td><td><span class="chip dev">Em desenvolvimento</span></td></tr>
+            <tr><td>Publicação real na Shopee</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Telas de regras por categoria, consentimento de IA e imagens por variação</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Instalador, licenças assinadas e teste em máquina limpa</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Inteligência de mercado (APIs oficiais primeiro) e agentes de otimização com IA; hoje existe apenas a estrutura de dados, sem coleta nem IA ativa</td><td><span class="chip">Planejado</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      MLA — Marketplace Listing Automation. O código-fonte e a documentação técnica são mantidos em um
+      repositório privado. Capturas da interface real com dados fictícios de demonstração.
+    </div>
+  </footer>
+</body>
+</html>
