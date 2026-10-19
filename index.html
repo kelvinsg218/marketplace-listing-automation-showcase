@@ -17,7 +17,8 @@
       <a class="brand" href="#inicio">MLA<small>Marketplace Listing Automation</small></a>
       <nav aria-label="Seções">
         <a class="optional" href="#problema">Problema</a>
-        <a href="#funcionalidades">Funcionalidades</a>
+        <a class="optional" href="#funcionalidades">Funcionalidades</a>
+        <a href="#validacao">Validação</a>
         <a class="optional" href="#telas">Telas</a>
         <a class="optional" href="#arquitetura">Arquitetura</a>
         <a href="#roadmap">Roadmap</a>
@@ -33,6 +34,7 @@
       <ul class="chips" aria-label="Situação do projeto">
         <li class="chip violet">Versão 0.1.0 + Catálogo Mestre Inteligente</li>
         <li class="chip ok">178 testes automatizados</li>
+        <li class="chip ok">Validação de out/2026: 78 verificações aprovadas</li>
         <li class="chip dev">Publicação real no Mercado Livre e Shopee em desenvolvimento</li>
       </ul>
       <div class="actions">
@@ -136,8 +138,8 @@
           <div class="copy">
             <span class="chip ok">Disponível</span>
             <h3>Marketplaces e contas</h3>
-            <p>Várias contas por marketplace, conta padrão, URL do vendedor validada pelo domínio oficial, navegador
-              Edge dedicado e isolado por conta e teste de conexão com login manual.</p>
+            <p>Várias contas por marketplace, conta padrão, URL do vendedor validada pelo domínio oficial, perfil
+              independente do Edge para cada conta (nunca o navegador pessoal) e teste de conexão com login manual.</p>
           </div>
           <figure>
             <img class="shot" src="docs/images/marketplaces-contas.png" width="1360" height="749" loading="lazy"
@@ -157,6 +159,15 @@
                  alt="Fila de automações com itens publicados no marketplace simulado e um item com falha">
           </figure>
         </div>
+
+        <div class="grid">
+          <div class="card"><span class="chip ok">Disponível</span><h3>Dashboard com indicadores</h3><p>Pipeline do
+            catálogo e dos anúncios, pendências que precisam de você e situação por marketplace.</p></div>
+          <div class="card"><span class="chip ok">Disponível</span><h3>Histórico, backup e logs</h3><p>Histórico com
+            filtros e detalhes passo a passo, exportação CSV, backup, restauração e log de cada operação.</p></div>
+          <div class="card"><span class="chip ok">Disponível</span><h3>Marketplace simulado</h3><p>Login, CAPTCHA de
+            teste, formulário e confirmação para demonstrar o fluxo completo sem publicar nada de verdade.</p></div>
+        </div>
       </div>
     </section>
 
@@ -175,6 +186,35 @@
       </div>
     </section>
 
+    <section id="validacao">
+      <div class="wrap">
+        <h2>Validação do Sistema — Outubro de 2026</h2>
+        <p class="sub">Em 19/10/2026 o MLA passou por uma demonstração visual completa, roteirizada e gravada, com o
+          aplicativo desktop real, dados fictícios numa pasta isolada e o marketplace simulado. Cada resultado foi
+          conferido no banco de dados, e não apenas na tela.</p>
+        <div class="stats">
+          <div class="stat ok"><b>78</b>verificações aprovadas</div>
+          <div class="stat warn"><b>2</b>falhas identificadas</div>
+          <div class="stat"><b>2</b>itens não executados</div>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>Validado</h3><p>Dashboard e navegação; cadastro completo no catálogo; importações CSV,
+            XLSX, JSON, XML, PDF, ZIP e fotos por SKU, com cancelamento sem gravar nada; compatibilidades; grupos;
+            contas com perfis independentes do Edge; preparação, validação e aprovação de anúncios; fila com pausa,
+            retomada, CAPTCHA simulado, rejeição, cancelamento, prevenção de duplicatas e recuperação após fechar o
+            app; histórico, backup, restauração e logs.</p></div>
+          <div class="card"><h3>Falhas identificadas (em correção)</h3><p>O botão “Reexecutar” do Histórico recusa
+            anúncios preparados pela tela de Anúncios (há contorno pela própria tela). O campo de preço do editor
+            aceita letras e as descarta sem avisar.</p></div>
+          <div class="card"><h3>Não executado</h3><p>Conexão com contas reais de Mercado Livre e Shopee (por regra,
+            nenhuma conta real foi acessada) e simulação de falha definitiva de etapa, que o marketplace simulado não
+            oferece pela interface.</p></div>
+        </div>
+        <p class="note">A demonstração não comprova publicação real no Mercado Livre ou na Shopee: todas as publicações
+          exibidas foram feitas no marketplace simulado.</p>
+      </div>
+    </section>
+
     <section id="telas">
       <div class="wrap">
         <h2>Mais telas</h2>
@@ -184,6 +224,10 @@
           <figure><a href="docs/images/importacao-revisao.png"><img class="shot" src="docs/images/importacao-revisao.png" width="1160" height="749" loading="lazy" alt="Revisão da importação com linhas para atualizar, sem mudanças e com erro"></a><figcaption>Revisão da importação</figcaption></figure>
           <figure><a href="docs/images/grupos.png"><img class="shot" src="docs/images/grupos.png" width="1360" height="749" loading="lazy" alt="Grupos de produtos com marketplaces de destino"></a><figcaption>Grupos de produtos</figcaption></figure>
           <figure><a href="docs/images/historico.png"><img class="shot" src="docs/images/historico.png" width="1360" height="749" loading="lazy" alt="Histórico de execuções no marketplace simulado"></a><figcaption>Histórico de operações (marketplace simulado)</figcaption></figure>
+          <figure><a href="docs/images/demo-importacao-alteracoes.webp"><img class="shot" src="docs/images/demo-importacao-alteracoes.webp" width="1366" height="697" loading="lazy" alt="Importação de planilha com alterações mostradas como valor atual e valor do arquivo"></a><figcaption>Atualização por planilha: alterações antes de gravar (demonstração)</figcaption></figure>
+          <figure><a href="docs/images/demo-automacao-pausa-revisao.webp"><img class="shot" src="docs/images/demo-automacao-pausa-revisao.webp" width="1366" height="697" loading="lazy" alt="Fila pausada com um anúncio aguardando revisão antes de publicar"></a><figcaption>Fila pausada e revisão obrigatória (demonstração)</figcaption></figure>
+          <figure><a href="docs/images/demo-marketplace-simulado.webp"><img class="shot" src="docs/images/demo-marketplace-simulado.webp" width="1032" height="474" loading="lazy" alt="Formulário do marketplace simulado preenchido pelo MLA com fotos, descrição, preço e estoque"></a><figcaption>Marketplace simulado preenchido pelo MLA (demonstração)</figcaption></figure>
+          <figure><a href="docs/images/demo-mercado-livre-bloqueado.webp"><img class="shot" src="docs/images/demo-mercado-livre-bloqueado.webp" width="1366" height="697" loading="lazy" alt="Anúncio aprovado no Mercado Livre com envio para a fila bloqueado até a integração real"></a><figcaption>Mercado Livre: envio bloqueado até a integração real (demonstração)</figcaption></figure>
         </div>
       </div>
     </section>
@@ -217,11 +261,17 @@
           <tbody>
             <tr><td>Base do app, catálogo, grupos, fila com revisão e marketplace simulado</td><td><span class="chip ok">Concluído</span></td></tr>
             <tr><td>Catálogo mestre, Central de Importações, compatibilidades, preparação de anúncios e contas</td><td><span class="chip ok">Concluído</span></td></tr>
-            <tr><td>Inspeção autorizada e publicação real no Mercado Livre</td><td><span class="chip dev">Em desenvolvimento</span></td></tr>
-            <tr><td>Publicação real na Shopee</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Demonstração visual completa e relatório de validação (19/10/2026)</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Segurança do navegador Edge: sandbox ativado nos perfis da automação</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Correção do botão “Reexecutar” no Histórico</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Validação rigorosa de preços no editor</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Ajustes de responsividade do Dashboard</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Melhorias na etapa de conclusão das importações</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Testes de conexão real com marketplaces, mediante autorização do lojista</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Inspeção autorizada e publicação real no Mercado Livre; depois, Shopee</td><td><span class="chip">Planejado</span></td></tr>
             <tr><td>Telas de regras por categoria, consentimento de IA e imagens por variação</td><td><span class="chip">Planejado</span></td></tr>
             <tr><td>Instalador, licenças assinadas e teste em máquina limpa</td><td><span class="chip">Planejado</span></td></tr>
-            <tr><td>Inteligência de mercado (APIs oficiais primeiro) e agentes de otimização com IA; hoje existe apenas a estrutura de dados, sem coleta nem IA ativa</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Inteligência de mercado com Scrapling (só onde permitido) e agentes de otimização com IA; hoje existe apenas a estrutura de dados, sem coleta nem IA ativa</td><td><span class="chip">Planejado</span></td></tr>
           </tbody>
         </table>
       </div>

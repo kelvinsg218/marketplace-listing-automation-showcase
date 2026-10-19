@@ -15,6 +15,7 @@ por conta e automatiza o preenchimento no navegador, sempre com revisão humana 
 | Versão | 0.1.0 + etapa “Catálogo Mestre Inteligente” |
 | Plataforma | Windows 10/11 (desktop) |
 | Testes automatizados | 178 (unidade, interface e ponta a ponta no Microsoft Edge) |
+| Demonstração visual completa (19/10/2026) | 78 verificações aprovadas, 2 falhas identificadas, 2 itens não executados ([detalhes](#validação-do-sistema--outubro-de-2026)) |
 | Publicação real no Mercado Livre e na Shopee | **Em desenvolvimento** — hoje o fluxo completo roda no marketplace simulado incluído |
 
 As capturas abaixo são da interface real do aplicativo, com dados fictícios de demonstração. Os anúncios marcados
@@ -67,6 +68,8 @@ CSV, XLSX, JSON, XML, PDF (tabela ou ficha técnica), ZIP com planilha e fotos e
 - Nada é gravado antes da confirmação; gravação de uma vez só (cancelar não altera nada); relatório por linha.
 - Arquivos executáveis, scripts e planilhas com macro dentro de ZIPs são ignorados e nunca executados.
 
+![Atualização por planilha: cada alteração aparece como valor atual → valor do arquivo](docs/images/demo-importacao-alteracoes.webp)
+
 ### Compatibilidade de produtos
 Marca, modelo, versão, anos, equipamento e código de referência, com fonte e estado de verificação. Dados do
 cliente entram como confirmados; fabricante e fontes externas, como não verificados. Nada é inferido.
@@ -80,9 +83,14 @@ Em execução, Publicado confirmado, Falha e Requer intervenção. Nota de compl
 
 ![Preparação de anúncios](docs/images/preparacao-anuncios.png)
 
+No Mercado Livre, os anúncios já podem ser preparados e aprovados, mas o envio para a fila fica bloqueado até a
+integração real ser validada:
+
+![Mercado Livre com envio bloqueado](docs/images/demo-mercado-livre-bloqueado.webp)
+
 ### Marketplaces e contas
-Várias contas por marketplace, conta padrão, URL do vendedor validada pelo domínio oficial, navegador Edge
-dedicado e isolado por conta e teste de conexão com login manual.
+Várias contas por marketplace, conta padrão, URL do vendedor validada pelo domínio oficial, **perfil independente do
+Edge para cada conta** (nunca o navegador pessoal) e teste de conexão com login manual.
 
 ![Marketplaces e contas](docs/images/marketplaces-contas.png)
 
@@ -95,15 +103,50 @@ ou em lote.
 |---|---|
 | ![Automações](docs/images/automacoes.png) | ![Grupos](docs/images/grupos.png) |
 
-### Dashboard e histórico de operações
-Pipeline do catálogo e dos anúncios, pendências, situação por marketplace e histórico com filtros, detalhes,
-reexecução segura e exportação CSV.
+![Fila pausada com um anúncio aguardando revisão antes de publicar](docs/images/demo-automacao-pausa-revisao.webp)
+
+### Dashboard, histórico, backup e logs
+Dashboard com indicadores do catálogo e dos anúncios, pendências e situação por marketplace. Histórico com filtros,
+detalhes passo a passo e exportação CSV. Backup manual e automático, restauração e log de cada operação.
 
 ![Histórico](docs/images/historico.png)
 
 ### Marketplace simulado
 Marketplace local com login, CAPTCHA de teste, formulário e confirmação, para demonstrar o fluxo completo sem
-publicar nada de verdade.
+publicar nada de verdade. Abaixo, o formulário do marketplace simulado preenchido pelo MLA (título, fotos,
+descrição, preço e estoque vindos do catálogo):
+
+![Formulário do marketplace simulado preenchido pelo MLA](docs/images/demo-marketplace-simulado.webp)
+
+---
+
+## Validação do Sistema — Outubro de 2026
+Em 19/10/2026 o MLA passou por uma demonstração visual completa, roteirizada e gravada, módulo por módulo. Foram
+usados o **aplicativo desktop real**, **dados fictícios** numa pasta isolada (sem contato com dados reais) e o
+**marketplace simulado** incluído no app. Cada resultado foi conferido no banco de dados, e não apenas na tela.
+
+| Resultado | Quantidade |
+|---|---|
+| Verificações aprovadas | **78** |
+| Falhas identificadas | **2** |
+| Itens não executados | **2** |
+
+**Validado na demonstração:** dashboard e navegação; cadastro completo no catálogo mestre (GTIN, variações,
+imagens, especificações); importações CSV, XLSX, JSON, XML, PDF, ZIP e fotos por SKU, com cancelamento sem gravar
+nada; compatibilidades; grupos; contas com perfis independentes do Edge; preparação, validação e aprovação de
+anúncios; automação com fila, pausa, retomada, CAPTCHA simulado, rejeição, cancelamento, prevenção de duplicatas e
+recuperação após fechar o app; histórico, backup, restauração e logs.
+
+**Falhas identificadas (em correção):**
+- o botão “Reexecutar” do Histórico recusa anúncios preparados pela tela de Anúncios; há um contorno pela própria
+  tela de Anúncios;
+- o campo de preço do editor aceita letras e as descarta sem avisar.
+
+**Não executados:** o teste de conexão com contas reais de Mercado Livre e Shopee (por regra, nenhuma conta real foi
+acessada) e a simulação de uma falha definitiva de etapa, que o marketplace simulado não oferece pela interface.
+
+> A demonstração **não comprova publicação real** no Mercado Livre ou na Shopee: todas as publicações exibidas
+> foram feitas no marketplace simulado.
 
 ---
 
@@ -131,6 +174,7 @@ Python 3.13 · PySide6 (Qt) · SQLite (WAL) · Playwright + Microsoft Edge · op
 ---
 
 ## Em desenvolvimento
+As integrações reais com marketplaces **ainda precisam de validação**:
 - **Publicação real no Mercado Livre** — depende da inspeção autorizada do formulário real da conta do vendedor.
 - **Publicação real na Shopee** — depois do Mercado Livre.
 - Estrutura já preparada (sem telas e sem coleta ativa): URLs de referência de concorrentes com fonte e data,
@@ -142,11 +186,17 @@ Python 3.13 · PySide6 (Qt) · SQLite (WAL) · Playwright + Microsoft Edge · op
 |---|---|
 | Base do app, catálogo, grupos, fila com revisão, marketplace simulado | Concluído |
 | Catálogo mestre, Central de Importações, compatibilidades, preparação de anúncios, contas | Concluído |
-| Inspeção autorizada e integração real com o Mercado Livre | Próxima etapa |
-| Integração real com a Shopee | Planejado |
+| Demonstração visual completa e relatório de validação (19/10/2026) | Concluído |
+| Segurança do navegador Edge: sandbox ativado nos perfis da automação | Próxima etapa |
+| Correção do botão “Reexecutar” no Histórico | Próxima etapa |
+| Validação rigorosa de preços no editor | Próxima etapa |
+| Ajustes de responsividade do Dashboard | Próxima etapa |
+| Melhorias na etapa de conclusão das importações | Próxima etapa |
+| Testes de conexão real com marketplaces, mediante autorização do lojista | Planejado |
+| Inspeção autorizada e integração real com o Mercado Livre; depois, Shopee | Planejado |
 | Telas de regras por categoria, consentimento de IA e imagens por variação | Planejado |
 | Instalador, licenças assinadas e teste em máquina limpa | Planejado |
-| Inteligência de mercado (APIs oficiais) e agentes de otimização com IA | Planejado |
+| Inteligência de mercado com Scrapling (só onde permitido) e agentes de otimização com IA | Planejado |
 
 ---
 
