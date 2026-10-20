@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MLA — Marketplace Listing Automation</title>
-  <meta name="description" content="Aplicativo desktop para Windows: catálogo mestre, importação de bases de produtos, compatibilidades e preparação de anúncios por marketplace e conta, com revisão humana antes de publicar.">
+  <meta name="description" content="Aplicativo Windows instalável (beta): catálogo de produtos, importação de bases de fornecedores, preparação de anúncios e conexão oficial com o Mercado Livre para validar anúncios sem publicar, com atualizações pelo próprio app.">
   <meta name="theme-color" content="#0C0B10">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,9 +16,10 @@
     <div class="wrap">
       <a class="brand" href="#inicio">MLA<small>Marketplace Listing Automation</small></a>
       <nav aria-label="Seções">
-        <a class="optional" href="#problema">Problema</a>
+        <a href="#desktop">Instalar</a>
+        <a class="optional" href="#mercadolivre">Mercado Livre</a>
         <a class="optional" href="#funcionalidades">Funcionalidades</a>
-        <a href="#validacao">Validação</a>
+        <a class="optional" href="#testes">Testes</a>
         <a class="optional" href="#telas">Telas</a>
         <a class="optional" href="#arquitetura">Arquitetura</a>
         <a href="#roadmap">Roadmap</a>
@@ -29,25 +30,93 @@
   <main id="inicio">
     <div class="wrap hero">
       <h1>Do catálogo da empresa ao anúncio revisado, em escala.</h1>
-      <p class="lead">O MLA organiza a base de produtos do lojista, prepara anúncios por marketplace e por conta e
-        automatiza o preenchimento no navegador, sempre com a sua aprovação antes de publicar.</p>
+      <p class="lead">Aplicativo para Windows que organiza a base de produtos do lojista, prepara anúncios por
+        marketplace e por conta e se conecta ao Mercado Livre pela API oficial para validar anúncios antes de
+        publicar, sempre com a sua aprovação.</p>
       <ul class="chips" aria-label="Situação do projeto">
-        <li class="chip violet">Versão 0.1.0 + Catálogo Mestre Inteligente</li>
-        <li class="chip ok">178 testes automatizados</li>
-        <li class="chip ok">Validação de out/2026: 78 verificações aprovadas</li>
-        <li class="chip dev">Publicação real no Mercado Livre e Shopee em desenvolvimento</li>
+        <li class="chip violet">Versão 0.1.2-beta para Windows (instalável)</li>
+        <li class="chip ok">256 testes automatizados aprovados</li>
+        <li class="chip ok">Mercado Livre: API oficial com validação sem publicar</li>
+        <li class="chip dev">Publicação real no Mercado Livre: ainda não validada</li>
       </ul>
       <div class="actions">
-        <a class="btn primary" href="#funcionalidades">Ver funcionalidades</a>
-        <a class="btn" href="#telas">Ver telas</a>
+        <a class="btn primary" href="#desktop">Instalar a versão beta</a>
+        <a class="btn" href="#funcionalidades">Ver funcionalidades</a>
       </div>
       <figure>
-        <img class="shot" src="docs/images/dashboard.png" width="1360" height="749"
-             alt="Dashboard do MLA com o pipeline do catálogo e dos anúncios, pendências e situação por marketplace">
-        <figcaption>Interface real com dados fictícios. Os anúncios “publicados” desta tela foram publicados no
-          marketplace simulado incluído no app, não em um marketplace real.</figcaption>
+        <img class="shot" src="docs/images/desktop-dashboard.png" width="1360" height="749"
+             alt="Visão geral do MLA 0.1.2-beta com 288 produtos fictícios: 266 prontos e 22 incompletos">
+        <figcaption>MLA 0.1.2-beta com um catálogo fictício de demonstração (288 produtos). Nenhum anúncio foi
+          publicado em marketplace real.</figcaption>
       </figure>
     </div>
+
+    <section id="desktop">
+      <div class="wrap">
+        <h2>Aplicativo Windows — versão beta</h2>
+        <p class="sub">O MLA é instalado como um programa comum do Windows. Cada pessoa usa no próprio computador,
+          com os próprios produtos, contas e configurações; nada é sincronizado com servidores do MLA.</p>
+        <div class="grid">
+          <div class="card"><span class="chip ok">Testado</span><h3>Instalar</h3><p>Baixe
+            <code>MLA-Setup-&lt;versão&gt;.exe</code> e o arquivo <code>.sha256</code> nas
+            <a href="https://github.com/kelvinsg218/marketplace-listing-automation-showcase/releases">releases deste repositório</a>, confira o código e dê dois cliques. Não precisa
+            ser administrador nem ter Python, Node.js ou VS Code.</p></div>
+          <div class="card"><span class="chip ok">Testado</span><h3>Seus dados ficam</h3><p>O programa fica em
+            <code>%LOCALAPPDATA%\Programs\MLA</code> e os dados em <code>%LOCALAPPDATA%\MLA</code>. Atualizar ou
+            desinstalar não apaga catálogo, contas, configurações, fila nem histórico; o banco recebe backup antes de
+            qualquer migração.</p></div>
+          <div class="card"><span class="chip ok">Testado</span><h3>Atualizações</h3><p>Em Atualizações →
+            Verificar agora, o MLA consulta as releases deste repositório, baixa o instalador novo, confere o
+            SHA-256, fecha, instala e abre de novo. O código-fonte não é publicado: as releases contêm só o
+            instalador.</p></div>
+          <div class="card"><span class="chip dev">Atenção</span><h3>Versão beta</h3><p>O instalador ainda não tem
+            assinatura digital: o Windows pode exibir o aviso do SmartScreen. Ainda não foi testado em um computador
+            limpo.</p></div>
+        </div>
+        <figure style="margin-top:24px">
+          <img class="shot" src="docs/images/desktop-atualizacoes.png" width="1072" height="199" loading="lazy"
+               alt="Painel de atualizações apontando para as releases do repositório de apresentação">
+          <figcaption>Painel de atualizações do aplicativo (captura real antes da primeira release publicada).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="mercadolivre">
+      <div class="wrap">
+        <h2>Mercado Livre pela API oficial</h2>
+        <p class="sub">A conta é conectada pelo fluxo oficial de autorização do Mercado Livre: o MLA nunca pede nem
+          guarda a senha, e os códigos de acesso ficam criptografados no Windows do usuário.</p>
+        <div class="feature">
+          <div class="copy">
+            <h3>Preparar e validar sem publicar</h3>
+            <ul>
+              <li>Sugestão de categoria pelo preditor oficial do Mercado Livre.</li>
+              <li>Lista dos atributos obrigatórios da categoria; o MLA cria as linhas e você preenche (nada é inventado).</li>
+              <li>“Validar no Mercado Livre (sem publicar)”: o anúncio é conferido pelo validador oficial e nenhum
+                anúncio é criado.</li>
+              <li>Importação dos anúncios que a conta já tem para o catálogo, com revisão antes de gravar.</li>
+            </ul>
+            <p class="note">Sugestão de categoria e atributos desta captura vieram do Mercado Livre de verdade
+              (endpoints públicos). Conexão, importação e validação foram testadas contra uma simulação dos
+              endpoints documentados, ainda não com uma conta real. A publicação está desligada.</p>
+          </div>
+          <figure><a href="docs/images/desktop-anuncio-mercado-livre.png"><img class="shot"
+            src="docs/images/desktop-anuncio-mercado-livre.png" width="1160" height="749" loading="lazy"
+            alt="Editor de anúncio com a categoria sugerida pelo Mercado Livre e os atributos obrigatórios da categoria"></a>
+            <figcaption>Editor de anúncio com as ferramentas da API oficial</figcaption></figure>
+        </div>
+        <div class="feature">
+          <div class="copy">
+            <h3>Contas por empresa</h3>
+            <p>Cada conta mostra se está conectada à API oficial. Contas, sessões e códigos de acesso ficam
+              separados por empresa e por computador.</p>
+          </div>
+          <figure><a href="docs/images/desktop-contas.png"><img class="shot" src="docs/images/desktop-contas.png"
+            width="1360" height="749" loading="lazy" alt="Tela de contas de marketplace com o estado da API oficial do Mercado Livre"></a>
+            <figcaption>Contas de marketplace</figcaption></figure>
+        </div>
+      </div>
+    </section>
 
     <section id="problema">
       <div class="wrap">
@@ -188,7 +257,7 @@
 
     <section id="validacao">
       <div class="wrap">
-        <h2>Validação do Sistema — Outubro de 2026</h2>
+        <h2>Demonstração visual — 19/10/2026</h2>
         <p class="sub">Em 19/10/2026 o MLA passou por uma demonstração visual completa, roteirizada e gravada, com o
           aplicativo desktop real, dados fictícios numa pasta isolada e o marketplace simulado. Cada resultado foi
           conferido no banco de dados, e não apenas na tela.</p>
@@ -203,9 +272,9 @@
             contas com perfis independentes do Edge; preparação, validação e aprovação de anúncios; fila com pausa,
             retomada, CAPTCHA simulado, rejeição, cancelamento, prevenção de duplicatas e recuperação após fechar o
             app; histórico, backup, restauração e logs.</p></div>
-          <div class="card"><h3>Falhas identificadas (em correção)</h3><p>O botão “Reexecutar” do Histórico recusa
-            anúncios preparados pela tela de Anúncios (há contorno pela própria tela). O campo de preço do editor
-            aceita letras e as descarta sem avisar.</p></div>
+          <div class="card"><h3>Falhas identificadas (corrigidas na 0.1.x)</h3><p>O botão “Reexecutar” do Histórico
+            recusava anúncios preparados pela tela de Anúncios e o campo de preço aceitava letras. As duas falhas
+            foram corrigidas, com testes automáticos.</p></div>
           <div class="card"><h3>Não executado</h3><p>Conexão com contas reais de Mercado Livre e Shopee (por regra,
             nenhuma conta real foi acessada) e simulação de falha definitiva de etapa, que o marketplace simulado não
             oferece pela interface.</p></div>
@@ -215,11 +284,37 @@
       </div>
     </section>
 
+    <section id="testes">
+      <div class="wrap">
+        <h2>Status dos testes — versão 0.1.2-beta</h2>
+        <p class="sub">256 testes automatizados aprovados, 0 falhos (unidade, interface e ponta a ponta no Microsoft
+          Edge com o marketplace simulado). Testes manuais feitos no computador de desenvolvimento (Windows 11).</p>
+        <table>
+          <thead><tr><th>Item</th><th>Situação</th></tr></thead>
+          <tbody>
+            <tr><td>Instalação pelo assistente e em modo silencioso; abertura sem terminal</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Recusa de instalar com o MLA aberto; desinstalação mantendo os dados</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Atualização entre versões pela interface, com dados idênticos e backup antes da migração do banco</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Consulta ao canal de atualizações do GitHub e download com conferência SHA-256 pela internet</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Importação de 300 produtos fictícios com 519 fotos, PDF e erros intencionais (integridade 100%)</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Mercado Livre: sugestão de categoria e atributos obrigatórios (endpoints públicos reais)</td><td><span class="chip ok">Testado</span></td></tr>
+            <tr><td>Mercado Livre: conexão, importação de anúncios e validação sem publicar</td><td><span class="chip dev">Testado só com simulação</span></td></tr>
+            <tr><td>Instalação em um computador limpo e em um segundo computador</td><td><span class="chip dev">Pendente</span></td></tr>
+            <tr><td>Conexão com uma conta real do Mercado Livre</td><td><span class="chip dev">Pendente</span></td></tr>
+            <tr><td>Publicação real no Mercado Livre</td><td><span class="chip dev">Não validada (desligada)</span></td></tr>
+            <tr><td>Shopee</td><td><span class="chip">Sem integração</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section id="telas">
       <div class="wrap">
         <h2>Mais telas</h2>
         <p class="sub">Capturas reais do aplicativo com dados fictícios. Clique para ampliar.</p>
         <div class="gallery">
+          <figure><a href="docs/images/desktop-catalogo.png"><img class="shot" src="docs/images/desktop-catalogo.png" width="1360" height="749" loading="lazy" alt="Catálogo com produtos fictícios, situação, preço, estoque e mídia"></a><figcaption>Catálogo de produtos (0.1.2-beta)</figcaption></figure>
+          <figure><a href="docs/images/desktop-importacao-concluida.png"><img class="shot" src="docs/images/desktop-importacao-concluida.png" width="1160" height="749" loading="lazy" alt="Conclusão da importação com produtos criados e linhas recusadas com o motivo"></a><figcaption>Importação concluída: linhas recusadas com o motivo (0.1.2-beta)</figcaption></figure>
           <figure><a href="docs/images/editor-produto.png"><img class="shot" src="docs/images/editor-produto.png" width="1120" height="749" loading="lazy" alt="Editor do produto na aba Básico com GTIN, fornecedor e checagem do anúncio"></a><figcaption>Editor do produto</figcaption></figure>
           <figure><a href="docs/images/importacao-revisao.png"><img class="shot" src="docs/images/importacao-revisao.png" width="1160" height="749" loading="lazy" alt="Revisão da importação com linhas para atualizar, sem mudanças e com erro"></a><figcaption>Revisão da importação</figcaption></figure>
           <figure><a href="docs/images/grupos.png"><img class="shot" src="docs/images/grupos.png" width="1360" height="749" loading="lazy" alt="Grupos de produtos com marketplaces de destino"></a><figcaption>Grupos de produtos</figcaption></figure>
@@ -242,6 +337,8 @@
           <div class="layer"><b>Importação</b><span>Leitores CSV/XLSX/JSON/XML/PDF, extração segura de ZIP, plano revisável e gravação em transação única.</span></div>
           <div class="layer"><b>Automação</b><span>Fila persistente, execução em thread própria, Playwright com Microsoft Edge e adaptadores por marketplace.</span></div>
           <div class="layer"><b>Persistência</b><span>SQLite com migrações versionadas e backup automático antes de cada atualização.</span></div>
+          <div class="layer"><b>Integrações</b><span>API oficial do Mercado Livre (OAuth com PKCE), códigos de acesso criptografados pelo Windows.</span></div>
+          <div class="layer"><b>Distribuição</b><span>Instalador por usuário, atualizador com conferência SHA-256 e releases públicas só com o instalador.</span></div>
         </div>
         <h3 style="margin-top:32px">Tecnologias</h3>
         <ul class="chips">
@@ -262,15 +359,14 @@
             <tr><td>Base do app, catálogo, grupos, fila com revisão e marketplace simulado</td><td><span class="chip ok">Concluído</span></td></tr>
             <tr><td>Catálogo mestre, Central de Importações, compatibilidades, preparação de anúncios e contas</td><td><span class="chip ok">Concluído</span></td></tr>
             <tr><td>Demonstração visual completa e relatório de validação (19/10/2026)</td><td><span class="chip ok">Concluído</span></td></tr>
-            <tr><td>Segurança do navegador Edge: sandbox ativado nos perfis da automação</td><td><span class="chip dev">Próxima etapa</span></td></tr>
-            <tr><td>Correção do botão “Reexecutar” no Histórico</td><td><span class="chip dev">Próxima etapa</span></td></tr>
-            <tr><td>Validação rigorosa de preços no editor</td><td><span class="chip dev">Próxima etapa</span></td></tr>
-            <tr><td>Ajustes de responsividade do Dashboard</td><td><span class="chip dev">Próxima etapa</span></td></tr>
-            <tr><td>Melhorias na etapa de conclusão das importações</td><td><span class="chip dev">Próxima etapa</span></td></tr>
-            <tr><td>Testes de conexão real com marketplaces, mediante autorização do lojista</td><td><span class="chip">Planejado</span></td></tr>
-            <tr><td>Inspeção autorizada e publicação real no Mercado Livre; depois, Shopee</td><td><span class="chip">Planejado</span></td></tr>
-            <tr><td>Telas de regras por categoria, consentimento de IA e imagens por variação</td><td><span class="chip">Planejado</span></td></tr>
-            <tr><td>Instalador, licenças assinadas e teste em máquina limpa</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Correções da demonstração (sandbox do Edge, Reexecutar, preços, Dashboard, tela de importação)</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Empresas separadas, histórico por campo, edição em lote, exportação de planilha e relatório de pendências</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Aplicativo Windows instalável com atualizações (0.1.2-beta)</td><td><span class="chip ok">Concluído</span></td></tr>
+            <tr><td>Mercado Livre pela API oficial: conexão, importação, categoria, atributos e validação sem publicar</td><td><span class="chip ok">Concluído (sem conta real)</span></td></tr>
+            <tr><td>Teste em um segundo computador e com uma conta real do Mercado Livre</td><td><span class="chip dev">Próxima etapa</span></td></tr>
+            <tr><td>Publicação real supervisionada no Mercado Livre, só com autorização do lojista; depois, Shopee</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Fotos e variações na validação; imagens por variação; regras por categoria</td><td><span class="chip">Planejado</span></td></tr>
+            <tr><td>Assinatura digital do instalador e licenças assinadas</td><td><span class="chip">Planejado</span></td></tr>
             <tr><td>Inteligência de mercado com Scrapling (só onde permitido) e agentes de otimização com IA; hoje existe apenas a estrutura de dados, sem coleta nem IA ativa</td><td><span class="chip">Planejado</span></td></tr>
           </tbody>
         </table>

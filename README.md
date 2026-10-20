@@ -1,25 +1,88 @@
 # MLA — Marketplace Listing Automation
 
 **Do catálogo da empresa ao anúncio revisado, em escala.**
-Aplicativo desktop para Windows que organiza a base de produtos de um lojista, prepara anúncios por marketplace e
-por conta e automatiza o preenchimento no navegador, sempre com revisão humana antes de publicar.
+Aplicativo para Windows (instalável, versão beta) que organiza a base de produtos de um lojista, prepara anúncios
+por marketplace e por conta e se conecta ao Mercado Livre pela API oficial para validar anúncios antes de publicar,
+sempre com revisão humana.
 
 > Este repositório é a **apresentação visual e comercial** do MLA. O código-fonte, os testes e a documentação
 > técnica ficam em um repositório privado.
 > Página de apresentação: [`index.html`](index.html) (pronta para o GitHub Pages).
 
-![Dashboard do MLA](docs/images/dashboard.png)
+![Visão geral do MLA 0.1.2-beta](docs/images/desktop-dashboard.png)
 
 | Situação | |
 |---|---|
-| Versão | 0.1.0 + etapa “Catálogo Mestre Inteligente” |
-| Plataforma | Windows 10/11 (desktop) |
-| Testes automatizados | 178 (unidade, interface e ponta a ponta no Microsoft Edge) |
-| Demonstração visual completa (19/10/2026) | 78 verificações aprovadas, 2 falhas identificadas, 2 itens não executados ([detalhes](#validação-do-sistema--outubro-de-2026)) |
-| Publicação real no Mercado Livre e na Shopee | **Em desenvolvimento** — hoje o fluxo completo roda no marketplace simulado incluído |
+| Versão | **0.1.2-beta** — aplicativo Windows instalável |
+| Plataforma | Windows 10/11 (64 bits), com Microsoft Edge |
+| Download | [Releases deste repositório](https://github.com/kelvinsg218/marketplace-listing-automation-showcase/releases) (só o instalador e o SHA-256; o código-fonte é privado) |
+| Testes automatizados | 256 aprovados, 0 falhos (unidade, interface e ponta a ponta no Microsoft Edge) |
+| Mercado Livre | API oficial: conexão, importação, categoria, atributos e **validação sem publicar** ([detalhes](#mercado-livre-pela-api-oficial)) |
+| Publicação real no Mercado Livre | **Não validada** — desligada nesta versão |
+| Shopee | Sem integração |
 
-As capturas abaixo são da interface real do aplicativo, com dados fictícios de demonstração. Os anúncios marcados
-como publicados nelas foram publicados no **marketplace simulado**, não em um marketplace real.
+As capturas são da interface real do aplicativo, com dados fictícios de demonstração. Os anúncios marcados como
+publicados em capturas antigas foram publicados no **marketplace simulado**, não em um marketplace real.
+
+---
+
+## Instalar a versão beta
+1. Em [Releases](https://github.com/kelvinsg218/marketplace-listing-automation-showcase/releases), baixe `MLA-Setup-<versão>.exe` e `MLA-Setup-<versão>.exe.sha256`.
+2. Confira o arquivo no PowerShell: `Get-FileHash .\MLA-Setup-<versão>.exe -Algorithm SHA256` deve mostrar o mesmo
+   código do `.sha256`. Se for diferente, não instale.
+3. Dê dois cliques no instalador (não precisa ser administrador). Como ainda não há assinatura digital, o Windows
+   pode mostrar "O Windows protegeu o computador": confira o código e use **Mais informações → Executar assim mesmo**.
+4. O MLA abre no fim. Programa em `%LOCALAPPDATA%\Programs\MLA`; dados em `%LOCALAPPDATA%\MLA`.
+
+**Atualizações:** no MLA, **Atualizações → Verificar agora → Baixar e instalar**. O app consulta as releases deste
+repositório, confere o SHA-256 do instalador, fecha, instala e abre de novo. Catálogo, contas, configurações, fila e
+histórico são mantidos, e o banco recebe backup antes de qualquer migração.
+
+**Desinstalar:** Configurações do Windows → Aplicativos instalados → MLA → Desinstalar (os dados ficam).
+
+![Painel de atualizações](docs/images/desktop-atualizacoes.png)
+
+## Mercado Livre pela API oficial
+A conta é conectada pelo fluxo oficial de autorização do Mercado Livre (o usuário cria o próprio aplicativo
+gratuito no portal de desenvolvedores). O MLA nunca pede nem guarda a senha; os códigos de acesso ficam
+criptografados no Windows do usuário.
+- **Sugerir categoria** pelo preditor oficial e **ver os atributos obrigatórios** da categoria (o MLA cria as linhas,
+  você preenche; nada é inventado).
+- **Validar no Mercado Livre (sem publicar):** o validador oficial confere o anúncio e nenhum anúncio é criado.
+- **Importar os anúncios da conta** para o catálogo, com revisão antes de gravar.
+- **Publicação: desligada** nesta versão; será liberada só com autorização do lojista, em teste supervisionado.
+
+![Editor de anúncio com as ferramentas do Mercado Livre](docs/images/desktop-anuncio-mercado-livre.png)
+
+A categoria sugerida e os atributos desta captura vieram do Mercado Livre de verdade (endpoints públicos).
+Conexão, importação e validação foram testadas contra uma simulação dos endpoints documentados, **ainda não com
+uma conta real**.
+
+![Contas de marketplace](docs/images/desktop-contas.png)
+
+## Status dos testes — 0.1.2-beta
+| Item | Situação |
+|---|---|
+| Instalação pelo assistente e silenciosa; abertura sem terminal | Testado |
+| Recusa de instalar com o MLA aberto; desinstalação mantendo os dados | Testado |
+| Atualização entre versões pela interface (dados idênticos, backup antes da migração) | Testado |
+| Canal de atualizações no GitHub e download com conferência SHA-256 pela internet | Testado |
+| Importação de 300 produtos fictícios, 519 fotos, PDF e erros intencionais (integridade 100%) | Testado |
+| Mercado Livre: sugestão de categoria e atributos (endpoints públicos reais) | Testado |
+| Mercado Livre: conexão, importação e validação sem publicar | Testado só com simulação |
+| Computador limpo / segundo computador | Pendente |
+| Conta real do Mercado Livre | Pendente |
+| Publicação real no Mercado Livre | Não validada (desligada) |
+
+## Limitações conhecidas
+- Publicação no Mercado Livre desligada; Shopee sem integração.
+- A validação do Mercado Livre ainda não envia fotos nem variações.
+- Instalador sem assinatura digital (aviso do SmartScreen); não testado em computador limpo.
+- O desinstalador abre uma janela de console por alguns segundos.
+
+![Catálogo](docs/images/desktop-catalogo.png)
+
+![Importação concluída](docs/images/desktop-importacao-concluida.png)
 
 ---
 
@@ -120,7 +183,7 @@ descrição, preço e estoque vindos do catálogo):
 
 ---
 
-## Validação do Sistema — Outubro de 2026
+## Demonstração visual — 19/10/2026
 Em 19/10/2026 o MLA passou por uma demonstração visual completa, roteirizada e gravada, módulo por módulo. Foram
 usados o **aplicativo desktop real**, **dados fictícios** numa pasta isolada (sem contato com dados reais) e o
 **marketplace simulado** incluído no app. Cada resultado foi conferido no banco de dados, e não apenas na tela.
@@ -137,10 +200,9 @@ nada; compatibilidades; grupos; contas com perfis independentes do Edge; prepara
 anúncios; automação com fila, pausa, retomada, CAPTCHA simulado, rejeição, cancelamento, prevenção de duplicatas e
 recuperação após fechar o app; histórico, backup, restauração e logs.
 
-**Falhas identificadas (em correção):**
-- o botão “Reexecutar” do Histórico recusa anúncios preparados pela tela de Anúncios; há um contorno pela própria
-  tela de Anúncios;
-- o campo de preço do editor aceita letras e as descarta sem avisar.
+**Falhas identificadas (corrigidas na 0.1.x, com testes automáticos):**
+- o botão “Reexecutar” do Histórico recusava anúncios preparados pela tela de Anúncios;
+- o campo de preço do editor aceitava letras e as descartava sem avisar.
 
 **Não executados:** o teste de conexão com contas reais de Mercado Livre e Shopee (por regra, nenhuma conta real foi
 acessada) e a simulação de uma falha definitiva de etapa, que o marketplace simulado não oferece pela interface.
@@ -174,8 +236,7 @@ Python 3.13 · PySide6 (Qt) · SQLite (WAL) · Playwright + Microsoft Edge · op
 ---
 
 ## Em desenvolvimento
-As integrações reais com marketplaces **ainda precisam de validação**:
-- **Publicação real no Mercado Livre** — depende da inspeção autorizada do formulário real da conta do vendedor.
+- **Publicação real no Mercado Livre** — pela API oficial, só com autorização do lojista e em teste supervisionado.
 - **Publicação real na Shopee** — depois do Mercado Livre.
 - Estrutura já preparada (sem telas e sem coleta ativa): URLs de referência de concorrentes com fonte e data,
   contrato para coletores (API oficial primeiro; Scrapling só quando permitido) e armazenamento de sugestões de IA
@@ -187,15 +248,14 @@ As integrações reais com marketplaces **ainda precisam de validação**:
 | Base do app, catálogo, grupos, fila com revisão, marketplace simulado | Concluído |
 | Catálogo mestre, Central de Importações, compatibilidades, preparação de anúncios, contas | Concluído |
 | Demonstração visual completa e relatório de validação (19/10/2026) | Concluído |
-| Segurança do navegador Edge: sandbox ativado nos perfis da automação | Próxima etapa |
-| Correção do botão “Reexecutar” no Histórico | Próxima etapa |
-| Validação rigorosa de preços no editor | Próxima etapa |
-| Ajustes de responsividade do Dashboard | Próxima etapa |
-| Melhorias na etapa de conclusão das importações | Próxima etapa |
-| Testes de conexão real com marketplaces, mediante autorização do lojista | Planejado |
-| Inspeção autorizada e integração real com o Mercado Livre; depois, Shopee | Planejado |
-| Telas de regras por categoria, consentimento de IA e imagens por variação | Planejado |
-| Instalador, licenças assinadas e teste em máquina limpa | Planejado |
+| Correções da demonstração (sandbox do Edge, Reexecutar, preços, Dashboard, tela de importação) | Concluído |
+| Empresas separadas, histórico por campo, edição em lote, exportação de planilha, relatório de pendências | Concluído |
+| Aplicativo Windows instalável com atualizações (0.1.2-beta) | Concluído |
+| Mercado Livre pela API oficial: conexão, importação, categoria, atributos, validação sem publicar | Concluído (sem conta real) |
+| Teste em um segundo computador e com uma conta real do Mercado Livre | Próxima etapa |
+| Publicação real supervisionada no Mercado Livre, só com autorização; depois, Shopee | Planejado |
+| Fotos e variações na validação; imagens por variação; regras por categoria | Planejado |
+| Assinatura digital do instalador e licenças assinadas | Planejado |
 | Inteligência de mercado com Scrapling (só onde permitido) e agentes de otimização com IA | Planejado |
 
 ---
